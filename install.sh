@@ -6,19 +6,12 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-# Change Debian to SID Branch
-cp /etc/apt/sources.list /etc/apt/sources.list.bak
-cp sources.list /etc/apt/sources.list
-
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
 # Update packages list and update system
 apt update
 apt upgrade -y
-
-# Install nala
-apt install nala -y
 
 # Making .config and Moving config files and background to Pictures
 cd $builddir
@@ -33,10 +26,7 @@ cp bg.jpg /home/$username/Pictures/
 mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 
-# Installing sugar-candy dependencies
-# Installing Essential Programs nala install feh bspwm sxhkd kitty rofi polybar picom thunar nitrogen lxpolkit x11-xserver-utils unzip yad wget pulseaudio pavucontrol -y
-# Installing Other less important Programs
-nala install neofetch vim papirus-icon-theme lxappearance fonts-noto-color-emoji -y
+apt install neofetch vim papirus-icon-theme lxappearance fonts-noto-color-emoji -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -44,7 +34,7 @@ git clone https://github.com/EliverLara/Nordic.git
 
 # Installing fonts
 cd $builddir 
-nala install fonts-font-awesome
+apt install fonts-font-awesome
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 unzip FiraCode.zip -d /home/$username/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
@@ -65,8 +55,8 @@ cd $builddir
 rm -rf Nordzy-cursors
 
 # Install brave-browser
-sudo nala install apt-transport-https curl -y
+sudo apt install apt-transport-https curl -y
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo nala update
-sudo nala install brave-browser -y
+sudo apt update
+sudo apt install brave-browser -y
