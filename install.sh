@@ -6,6 +6,10 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+# Change Debian to SID Branch
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+cp sources.list /etc/apt/sources.list
+
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
@@ -13,20 +17,28 @@ builddir=$(pwd)
 apt update
 apt upgrade -y
 
+apt install nala
+
 # Making .config and Moving config files and background to Pictures
 cd $builddir
 mkdir -p /home/$username/.config
 mkdir -p /home/$username/.fonts
 mkdir -p /home/$username/Pictures
-mkdir -p /usr/share/sddm/themes
+#mkdir -p /usr/share/sddm/themes
 cp .Xresources /home/$username
 cp .Xnord /home/$username
 cp -R dotconfig/* /home/$username/.config/
 cp bg.jpg /home/$username/Pictures/
 mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
+#tar -xzvf sugar-candy.tar.gz -C /usr/share/sddm/themes
 
-apt install neofetch vim papirus-icon-theme lxappearance fonts-noto-color-emoji -y
+# Installing sugar-candy dependencies
+#nala install libqt5svg5 qml-module-qtquick-controls qml-module-qtquick-controls2 -y
+# Installing Essential Programs 
+nala install firefox i3 rofi polybar picom thunar nitrogen unzip wget pulseaudio pavucontrol -y
+# Installing Other less important Programs
+nala install neofetch papirus-icon-theme fonts-noto-color-emoji lightdm -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -34,7 +46,7 @@ git clone https://github.com/EliverLara/Nordic.git
 
 # Installing fonts
 cd $builddir 
-apt install fonts-font-awesome
+nala install fonts-font-awesome
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 unzip FiraCode.zip -d /home/$username/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
@@ -55,8 +67,15 @@ cd $builddir
 rm -rf Nordzy-cursors
 
 # Install brave-browser
-sudo apt install apt-transport-https curl -y
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update
-sudo apt install brave-browser -y
+#sudo nala install apt-transport-https curl -y
+#sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+#echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+#sudo nala update
+#sudo nala install brave-browser -y
+
+# Enable graphical login and change target from CLI to GUI
+systemctl enable lightdm
+systemctl set-default graphical.target
+
+# Polybar configuration
+bash scripts/changeinterface
