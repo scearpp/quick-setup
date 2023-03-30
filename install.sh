@@ -7,8 +7,6 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Change Debian to SID Branch
-cp /etc/apt/sources.list /etc/apt/sources.list.bak
-cp sources.list /etc/apt/sources.list
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
@@ -24,19 +22,17 @@ cd $builddir
 mkdir -p /home/$username/.config
 mkdir -p /home/$username/.fonts
 mkdir -p /home/$username/Pictures
-#mkdir -p /usr/share/sddm/themes
 cp .Xresources /home/$username
 cp .Xnord /home/$username
 cp -R dotconfig/* /home/$username/.config/
 cp bg.jpg /home/$username/Pictures/
 mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
-#tar -xzvf sugar-candy.tar.gz -C /usr/share/sddm/themes
 
 # Installing sugar-candy dependencies
 #nala install libqt5svg5 qml-module-qtquick-controls qml-module-qtquick-controls2 -y
 # Installing Essential Programs 
-nala install firefox awesome rofi polybar picom thunar nitrogen unzip wget pulseaudio pavucontrol -y
+nala install firefox i3 rofi picom thunar nitrogen unrar wget pulseaudio pavucontrol -y
 # Installing Other less important Programs
 nala install neofetch papirus-icon-theme fonts-noto-color-emoji lightdm -y
 
@@ -65,13 +61,6 @@ cd Nordzy-cursors
 ./install.sh
 cd $builddir
 rm -rf Nordzy-cursors
-
-# Install brave-browser
-#sudo nala install apt-transport-https curl -y
-#sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-#echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-#sudo nala update
-#sudo nala install brave-browser -y
 
 # Enable graphical login and change target from CLI to GUI
 systemctl enable lightdm
