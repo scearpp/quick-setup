@@ -9,8 +9,8 @@ Use the following Debian ISO as the base
 ### To install:
 
 ```
-git clone https://github.com/ChrisTitusTech/debian-titus
-cd debian-titus
+git clone https://github.com/scearpp/quick-setup
+cd quick-setup
 sudo ./install.sh
 ```
 
