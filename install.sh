@@ -29,12 +29,10 @@ cp bg.jpg /home/$username/Pictures/
 mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 
-# Installing sugar-candy dependencies
-#nala install libqt5svg5 qml-module-qtquick-controls qml-module-qtquick-controls2 -y
 # Installing Essential Programs 
-nala install firefox i3 rofi picom thunar nitrogen unrar wget pulseaudio pavucontrol -y
+nala install firefox rofi picom thunar nitrogen unrar wget i3 pulseaudio pavucontrol -y
 # Installing Other less important Programs
-nala install neofetch papirus-icon-theme fonts-noto-color-emoji lightdm -y
+nala install neofetch papirus-icon-theme fonts-noto-color-emoji slim -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -63,7 +61,7 @@ cd $builddir
 rm -rf Nordzy-cursors
 
 # Enable graphical login and change target from CLI to GUI
-systemctl enable lightdm
+systemctl enable slim
 systemctl set-default graphical.target
 
 # Polybar configuration
