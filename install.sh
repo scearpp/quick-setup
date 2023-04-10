@@ -27,6 +27,8 @@ cp -R dotconfig/* /home/$username/.config/
 cp bg.jpg /home/$username/Pictures/
 mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
+cd $HOME
+cp config ~/.config/i3/
 
 # Installing Essential Programs 
 nala install firefox rofi picom thunar nitrogen unrar wget i3 pulseaudio pavucontrol -y
@@ -46,6 +48,7 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
 unzip Meslo.zip -d /home/$username/.fonts
 mv dotfonts/fontawesome/otfs/*.otf /home/$username/.fonts/
 chown $username:$username /home/$username/.fonts/*
+
 
 # Reloading Font
 fc-cache -vf
