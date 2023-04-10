@@ -10,6 +10,9 @@ T
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
+cp /etc/apt/sources.list /etc/apt/sources.list.bak
+cp sources.list /etc/apt/sources.list
+
 # Update packages list and update system
 apt update
 apt upgrade -y
