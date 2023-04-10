@@ -33,7 +33,7 @@ cp config ~/.config/i3/
 # Installing Essential Programs 
 nala install firefox rofi picom thunar nitrogen unrar wget i3 pulseaudio pavucontrol -y
 # Installing Other less important Programs
-nala install neofetch papirus-icon-theme fonts-noto-color-emoji slim -y
+nala install neofetch lightdm papirus-icon-theme fonts-noto-color-emoji -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -63,7 +63,7 @@ cd $builddir
 rm -rf Nordzy-cursors
 
 # Enable graphical login and change target from CLI to GUI
-systemctl enable slim
+systemctl enable lightdm
 systemctl set-default graphical.target
 
 # Polybar configuration
