@@ -17,7 +17,10 @@ cp sources.list /etc/apt/sources.list
 apt update
 apt upgrade -y
 
+apt install xfce4
+apt install dkms
 apt install nala
+apt install build-essentials
 
 # Making .config and Moving config files and background to Pictures
 cd $builddir
@@ -27,16 +30,15 @@ mkdir -p /home/$username/Pictures
 cp .Xresources /home/$username
 cp .Xnord /home/$username
 cp -R dotconfig/* /home/$username/.config/
-cp bg.jpg /home/$username/Pictures/
+cp peng.jpg /home/$username/Pictures/
+cp deb.png /home/$username/Pictures/
 mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 cd $HOME
-cp config ~/.config/i3/
-
 # Installing Essential Programs 
-nala install firefox rofi picom thunar nitrogen unrar wget i3 pulseaudio pavucontrol -y
+nala install git software-properties-common firefox unrar wget pulseaudio pavucontrol -y
 # Installing Other less important Programs
-nala install neofetch lightdm papirus-icon-theme fonts-noto-color-emoji -y
+nala install neofetch papirus-icon-theme fonts-noto-color-emoji -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -64,10 +66,11 @@ cd Nordzy-cursors
 ./install.sh
 cd $builddir
 rm -rf Nordzy-cursors
+# Install NetGear Driver
+cd $HOME
 
-# Enable graphical login and change target from CLI to GUI
-systemctl enable lightdm
-systemctl set-default graphical.target
-
-# Polybar configuration
-bash scripts/changeinterface
+mkdir gitShit
+cd gitShit
+git clone --recursive https://github.com/morrownr/8814au
+cd 8814au
+./install-driver.sh
