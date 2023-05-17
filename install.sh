@@ -36,7 +36,7 @@ mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 cd $HOME
 # Installing Essential Programs 
-nala install git software-properties-common firefox unrar wget pulseaudio pavucontrol -y
+nala install steam git software-properties-common firefox unrar wget pulseaudio pavucontrol -y
 # Installing Other less important Programs
 nala install neofetch papirus-icon-theme fonts-noto-color-emoji -y
 
@@ -64,13 +64,20 @@ rm ./FiraCode.zip ./Meslo.zip
 git clone https://github.com/alvatip/Nordzy-cursors
 cd Nordzy-cursors
 ./install.sh
-cd $builddir
 rm -rf Nordzy-cursors
+
 # Install NetGear Driver
 cd $HOME
-
 mkdir gitShit
 cd gitShit
 git clone --recursive https://github.com/morrownr/8814au
 cd 8814au
 ./install-driver.sh
+
+
+#Install Custom Proton
+cd $HOME
+mkdir XProton
+cd XProton
+git clone https://github.com/Termuellinator/Proton-Community-Updater
+echo  FINISHED!!!!, well we hope lol
