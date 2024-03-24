@@ -10,9 +10,6 @@ T
 username=$(id -u -n 1000)
 builddir=$(pwd)
 
-cp /etc/apt/sources.list /etc/apt/sources.list.bak
-cp sources.list /etc/apt/sources.list
-
 # Update packages list and update system
 apt update
 apt upgrade -y
@@ -73,11 +70,4 @@ cd gitShit
 git clone --recursive https://github.com/morrownr/8814au
 cd 8814au
 ./install-driver.sh
-
-
-#Install Custom Proton
-cd $HOME
-mkdir XProton
-cd XProton
-git clone https://github.com/Termuellinator/Proton-Community-Updater
-echo  FINISHED!!!!, well we hope lol
+ echo "NETGEAR RTL188AU DRIVER INSTALLED"
