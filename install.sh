@@ -5,7 +5,6 @@ if [[ $EUID -ne 0 ]]; then
   echo "You must be a root user to run this script, please run sudo ./install.sh" 2>&1
   exit 1
 fi
-T
 
 username=$(id -u -n 1000)
 builddir=$(pwd)
@@ -72,12 +71,17 @@ mkdir gitShit
 cd gitShit
 git clone --recursive https://github.com/morrownr/8814au
 cd 8814au
-./install-driver.sh
+./install-driver.sh -n -n
 
+apt update && apt install github-desktop
+
+echo "Installing GitHub Desktop"
+wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
+sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" > /etc/apt/sources.list.d/shiftkey-packages.list'
 
 #Install Custom Proton
 cd $HOME
 mkdir XProton
 cd XProton
 git clone https://github.com/Termuellinator/Proton-Community-Updater
-echo  FINISHED!!!!, well we hope lol
+echo  "FINISHED!!!!, well we hope lol"
