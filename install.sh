@@ -16,7 +16,6 @@ cp sources.list /etc/apt/sources.list
 apt update
 apt upgrade -y
 
-apt install xfce4
 apt install dkms
 apt install nala
 apt install build-essentials
@@ -35,7 +34,7 @@ mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 cd $HOME
 # Installing Essential Programs 
-nala install steam git software-properties-common firefox unrar wget pulseaudio pavucontrol -y
+nala install git software-properties-common firefox unrar wget pulseaudio pavucontrol -y
 # Installing Other less important Programs
 nala install neofetch papirus-icon-theme fonts-noto-color-emoji -y
 
@@ -73,15 +72,8 @@ git clone --recursive https://github.com/morrownr/8814au
 cd 8814au
 ./install-driver.sh -n -n
 
-apt update && apt install github-desktop
 
 echo "Installing GitHub Desktop"
 wget -qO - https://apt.packages.shiftkey.dev/gpg.key | gpg --dearmor | sudo tee /usr/share/keyrings/shiftkey-packages.gpg > /dev/null
 sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/shiftkey-packages.gpg] https://apt.packages.shiftkey.dev/ubuntu/ any main" > /etc/apt/sources.list.d/shiftkey-packages.list'
-
-#Install Custom Proton
-cd $HOME
-mkdir XProton
-cd XProton
-git clone https://github.com/Termuellinator/Proton-Community-Updater
-echo  "FINISHED!!!!, well we hope lol"
+apt update && apt install github-desktop
